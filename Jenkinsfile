@@ -12,7 +12,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'echo "Fail!"; exit 1'
+                sh 'echo "Should Be Success!"'
             }
         }
     }
@@ -22,6 +22,10 @@ pipeline {
         }
         success {
             echo 'This will run only if successful'
+            mail to: 'cmr99223@126.com',
+             subject: "Success Pipeline: ${currentBuild.fullDisplayName}",
+             body: "Something is successfull with ${env.BUILD_URL}"
+        
         }
         failure {
             echo 'This will run only if failed'
